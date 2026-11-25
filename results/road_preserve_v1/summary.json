@@ -1,0 +1,694 @@
+{
+  "protocol": {
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "strengths": [
+      0,
+      0.25,
+      1,
+      4
+    ],
+    "threshold": 0.6,
+    "epochs": 12,
+    "lr": 0.0003,
+    "batch_size": 24,
+    "architecture": "unchanged equal-weight residual model from adaptive_v1; frozen 200-scene baseline",
+    "loss": "BCE + lambda * weighted mean squared downward logit change on baseline-correct true road",
+    "protection": "true road AND baseline probability >= 0.6; weight 2 without ground, 1 with ground; training labels only",
+    "checkpoint_selection": "dev IoU >= baseline, walkway pass FP <= baseline, recall >= baseline - 0.002; maximize IoU; fallback to unchanged baseline if none",
+    "strength_selection": "among .25,1,4 maximize number of seeds with feasible improved dev IoU, then mean dev IoU, then minimize mean walkway pass FP",
+    "control": "lambda 0 uses the same recall-constrained checkpoint selection",
+    "evaluation": "evaluate only lambda 0 and dev-selected lambda, on existing 150/27-scene sets after all training",
+    "validation_caveat": "Existing evaluation sets have been inspected before; this is not a new blind test"
+  },
+  "locked": {
+    "strength": 0.25,
+    "ranking": {
+      "0.25": [
+        3,
+        0.858658135662281,
+        -933.3333333333334
+      ],
+      "1": [
+        3,
+        0.8570863556806666,
+        -944.3333333333334
+      ],
+      "4": [
+        3,
+        0.8556829171604701,
+        -1003.0
+      ]
+    },
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "threshold": 0.6
+  },
+  "evaluation": {
+    "val": {
+      "metrics": {
+        "baseline": {
+          "iou": {
+            "mean": 0.7745294106813688,
+            "values": [
+              0.7745294106813688,
+              0.7745294106813688,
+              0.7745294106813688
+            ]
+          },
+          "recall": {
+            "mean": 0.890637265825758,
+            "values": [
+              0.890637265825758,
+              0.890637265825758,
+              0.890637265825758
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 78244,
+            "values": [
+              78244,
+              78244,
+              78244
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 12543,
+            "values": [
+              12543,
+              12543,
+              12543
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 36174,
+            "values": [
+              36174,
+              36174,
+              36174
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.8707425815432767,
+            "values": [
+              0.8707425815432767,
+              0.8707425815432767,
+              0.8707425815432767
+            ]
+          }
+        },
+        "previous_equal": {
+          "iou": {
+            "mean": 0.7785035244945642,
+            "values": [
+              0.7786838378277964,
+              0.7780985944847697,
+              0.7787281411711264
+            ]
+          },
+          "recall": {
+            "mean": 0.878547618738207,
+            "values": [
+              0.8796374597927585,
+              0.8714903644606249,
+              0.8845150319612374
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 61488.333333333336,
+            "values": [
+              62146,
+              55830,
+              66489
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 9852.333333333334,
+            "values": [
+              9680,
+              9167,
+              10710
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 31792.333333333332,
+            "values": [
+              31329,
+              30580,
+              33468
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.858118231731385,
+            "values": [
+              0.8598672191774718,
+              0.8498586992772262,
+              0.8646287767394571
+            ]
+          }
+        },
+        "recall_selection_only": {
+          "iou": {
+            "mean": 0.7759247846433328,
+            "values": [
+              0.7745294106813688,
+              0.7745294106813688,
+              0.7787155325672609
+            ]
+          },
+          "recall": {
+            "mean": 0.8885591396400364,
+            "values": [
+              0.890637265825758,
+              0.890637265825758,
+              0.8844028872685933
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 74284.66666666667,
+            "values": [
+              78244,
+              78244,
+              66366
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 11917.333333333334,
+            "values": [
+              12543,
+              12543,
+              10666
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 35243,
+            "values": [
+              36174,
+              36174,
+              33381
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.8686758418746121,
+            "values": [
+              0.8707425815432767,
+              0.8707425815432767,
+              0.864542362537283
+            ]
+          }
+        },
+        "preserve": {
+          "iou": {
+            "mean": 0.7804963850574658,
+            "values": [
+              0.7795739485538669,
+              0.7819152317544001,
+              0.7799999748641302
+            ]
+          },
+          "recall": {
+            "mean": 0.8918018700087389,
+            "values": [
+              0.8912480452891287,
+              0.8880199145871367,
+              0.8961376501499514
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 71184,
+            "values": [
+              71490,
+              66579,
+              75483
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 11112.333333333334,
+            "values": [
+              10940,
+              10577,
+              11820
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 34329,
+            "values": [
+              33782,
+              33292,
+              35913
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.8725471531246161,
+            "values": [
+              0.8723452949492249,
+              0.8683931954216676,
+              0.8769029690029556
+            ]
+          }
+        }
+      },
+      "contrasts": {
+        "baseline": {
+          "iou_delta_pp": 0.5966974376096945,
+          "recall_delta_pp": 0.11646041829809217,
+          "walkway_pass_reduction_pct": 11.406096361848572,
+          "joint_improvement_seeds": [
+            17,
+            29,
+            43
+          ],
+          "recall_within_02pp_seeds": [
+            17,
+            43
+          ]
+        },
+        "previous_equal": {
+          "iou_delta_pp": 0.19928605629015994,
+          "recall_delta_pp": 1.3254251270531925,
+          "walkway_pass_reduction_pct": -12.788848665290796,
+          "joint_improvement_seeds": [],
+          "recall_within_02pp_seeds": [
+            17,
+            29,
+            43
+          ]
+        },
+        "recall_selection_only": {
+          "iou_delta_pp": 0.4571600414132959,
+          "recall_delta_pp": 0.32427303687024844,
+          "walkway_pass_reduction_pct": 6.75486686059521,
+          "joint_improvement_seeds": [
+            17,
+            29
+          ],
+          "recall_within_02pp_seeds": [
+            17,
+            43
+          ]
+        }
+      },
+      "changes": {
+        "17": {
+          "recall_selection_only": {
+            "deleted_true_road": 0,
+            "recovered_true_road": 0,
+            "restored_previous_misses": 44490
+          },
+          "preserve": {
+            "deleted_true_road": 17326,
+            "recovered_true_road": 18595,
+            "restored_previous_misses": 29005
+          }
+        },
+        "29": {
+          "recall_selection_only": {
+            "deleted_true_road": 0,
+            "recovered_true_road": 0,
+            "restored_previous_misses": 58306
+          },
+          "preserve": {
+            "deleted_true_road": 20847,
+            "recovered_true_road": 15409,
+            "restored_previous_misses": 39104
+          }
+        },
+        "43": {
+          "recall_selection_only": {
+            "deleted_true_road": 29387,
+            "recovered_true_road": 16434,
+            "restored_previous_misses": 238
+          },
+          "preserve": {
+            "deleted_true_road": 10961,
+            "recovered_true_road": 22389,
+            "restored_previous_misses": 19441
+          }
+        }
+      }
+    },
+    "reserved": {
+      "metrics": {
+        "baseline": {
+          "iou": {
+            "mean": 0.7300427967412602,
+            "values": [
+              0.7300427967412602,
+              0.7300427967412602,
+              0.7300427967412602
+            ]
+          },
+          "recall": {
+            "mean": 0.8822233715090413,
+            "values": [
+              0.8822233715090413,
+              0.8822233715090413,
+              0.8822233715090413
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 11509,
+            "values": [
+              11509,
+              11509,
+              11509
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 1382,
+            "values": [
+              1382,
+              1382,
+              1382
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 6748,
+            "values": [
+              6748,
+              6748,
+              6748
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.8555258962164017,
+            "values": [
+              0.8555258962164017,
+              0.8555258962164017,
+              0.8555258962164017
+            ]
+          }
+        },
+        "previous_equal": {
+          "iou": {
+            "mean": 0.7355141341472596,
+            "values": [
+              0.7341702513373747,
+              0.7379708921055063,
+              0.7344012589988979
+            ]
+          },
+          "recall": {
+            "mean": 0.8741676324829996,
+            "values": [
+              0.8731166581508667,
+              0.8712379896065701,
+              0.8781482496915619
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 9021.333333333334,
+            "values": [
+              8923,
+              8396,
+              9745
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 1007.6666666666666,
+            "values": [
+              951,
+              940,
+              1132
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 5793.333333333333,
+            "values": [
+              5647,
+              5534,
+              6199
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.8467259552339701,
+            "values": [
+              0.8457383142956509,
+              0.8440400536578095,
+              0.8503994977484497
+            ]
+          }
+        },
+        "recall_selection_only": {
+          "iou": {
+            "mean": 0.7314964318260424,
+            "values": [
+              0.7300427967412602,
+              0.7300427967412602,
+              0.734403701995607
+            ]
+          },
+          "recall": {
+            "mean": 0.8808629205455096,
+            "values": [
+              0.8822233715090413,
+              0.8822233715090413,
+              0.8781420186184464
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 10916.666666666666,
+            "values": [
+              11509,
+              11509,
+              9732
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 1294.6666666666667,
+            "values": [
+              1382,
+              1382,
+              1120
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 6554.666666666667,
+            "values": [
+              6748,
+              6748,
+              6168
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.8538607576831991,
+            "values": [
+              0.8555258962164017,
+              0.8555258962164017,
+              0.8505304806167938
+            ]
+          }
+        },
+        "preserve": {
+          "iou": {
+            "mean": 0.734919899194334,
+            "values": [
+              0.7343097154417909,
+              0.7357107088277189,
+              0.7347392733134921
+            ]
+          },
+          "recall": {
+            "mean": 0.8845839097075965,
+            "values": [
+              0.8842889722468004,
+              0.883413506474085,
+              0.8860492504019042
+            ]
+          },
+          "walkway_raw_fp": {
+            "mean": 10141.666666666666,
+            "values": [
+              10010,
+              9818,
+              10597
+            ]
+          },
+          "walkway_pass_fp": {
+            "mean": 1175.6666666666667,
+            "values": [
+              1117,
+              1146,
+              1264
+            ]
+          },
+          "offroad_pass_fp": {
+            "mean": 6316.666666666667,
+            "values": [
+              6190,
+              6168,
+              6592
+            ]
+          },
+          "missing_recall": {
+            "mean": 0.8583412751106956,
+            "values": [
+              0.8587462681174148,
+              0.8572060902517129,
+              0.859071466962959
+            ]
+          }
+        }
+      },
+      "contrasts": {
+        "baseline": {
+          "iou_delta_pp": 0.4877102453073823,
+          "recall_delta_pp": 0.23605381985551954,
+          "walkway_pass_reduction_pct": 14.930053063193437,
+          "joint_improvement_seeds": [
+            17,
+            29,
+            43
+          ],
+          "recall_within_02pp_seeds": [
+            17,
+            29,
+            43
+          ]
+        },
+        "previous_equal": {
+          "iou_delta_pp": -0.05942349529256541,
+          "recall_delta_pp": 1.0416277224596926,
+          "walkway_pass_reduction_pct": -16.672179953688392,
+          "joint_improvement_seeds": [],
+          "recall_within_02pp_seeds": [
+            17,
+            29,
+            43
+          ]
+        },
+        "recall_selection_only": {
+          "iou_delta_pp": 0.3423467368291577,
+          "recall_delta_pp": 0.3720989162086852,
+          "walkway_pass_reduction_pct": 9.191555097837279,
+          "joint_improvement_seeds": [
+            17,
+            29
+          ],
+          "recall_within_02pp_seeds": [
+            17,
+            29,
+            43
+          ]
+        }
+      },
+      "changes": {
+        "17": {
+          "recall_selection_only": {
+            "deleted_true_road": 0,
+            "recovered_true_road": 0,
+            "restored_previous_misses": 6717
+          },
+          "preserve": {
+            "deleted_true_road": 2496,
+            "recovered_true_road": 3159,
+            "restored_previous_misses": 4537
+          }
+        },
+        "29": {
+          "recall_selection_only": {
+            "deleted_true_road": 0,
+            "recovered_true_road": 0,
+            "restored_previous_misses": 7407
+          },
+          "preserve": {
+            "deleted_true_road": 2584,
+            "recovered_true_road": 2966,
+            "restored_previous_misses": 5125
+          }
+        },
+        "43": {
+          "recall_selection_only": {
+            "deleted_true_road": 4118,
+            "recovered_true_road": 2808,
+            "restored_previous_misses": 66
+          },
+          "preserve": {
+            "deleted_true_road": 1995,
+            "recovered_true_road": 3223,
+            "restored_previous_misses": 2507
+          }
+        }
+      }
+    }
+  },
+  "preselected_examples": [
+    {
+      "split": "val",
+      "scene": "scene-0109",
+      "token": "3db7f78070b6414d8ef6ee9132187ba3",
+      "file": "compare_val_scene-0109_105.png",
+      "previous_new_misses": 528,
+      "current_new_misses": 177,
+      "restored": 355,
+      "previous_walkway_pass": 13,
+      "current_walkway_pass": 19
+    },
+    {
+      "split": "val",
+      "scene": "scene-0931",
+      "token": "fe67e166d5a24821b0caaf7d8f4260d0",
+      "file": "compare_val_scene-0931_463.png",
+      "previous_new_misses": 427,
+      "current_new_misses": 209,
+      "restored": 230,
+      "previous_walkway_pass": 24,
+      "current_walkway_pass": 25
+    },
+    {
+      "split": "val",
+      "scene": "scene-0909",
+      "token": "96e81836a44342ea999ad2a96e025e96",
+      "file": "compare_val_scene-0909_396.png",
+      "previous_new_misses": 109,
+      "current_new_misses": 55,
+      "restored": 61,
+      "previous_walkway_pass": 33,
+      "current_walkway_pass": 36
+    },
+    {
+      "split": "reserved",
+      "scene": "scene-1001",
+      "token": "31d02a728b174611a1f517875a8c1942",
+      "file": "compare_reserved_scene-1001_87.png",
+      "previous_new_misses": 346,
+      "current_new_misses": 153,
+      "restored": 199,
+      "previous_walkway_pass": 0,
+      "current_walkway_pass": 2
+    },
+    {
+      "split": "reserved",
+      "scene": "scene-0218",
+      "token": "08179b12ab014ee6b1ae827e42a5c643",
+      "file": "compare_reserved_scene-0218_1.png",
+      "previous_new_misses": 313,
+      "current_new_misses": 119,
+      "restored": 203,
+      "previous_walkway_pass": 0,
+      "current_walkway_pass": 0
+    },
+    {
+      "split": "reserved",
+      "scene": "scene-0535",
+      "token": "a1244ba89d3644a7b49d90d412068618",
+      "file": "compare_reserved_scene-0535_10.png",
+      "previous_new_misses": 76,
+      "current_new_misses": 47,
+      "restored": 36,
+      "previous_walkway_pass": 10,
+      "current_walkway_pass": 10
+    }
+  ],
+  "source_sha256": {
+    "road_preserve_audit.py": "0aba37069d0c656dc23bb507357ccc16758ef61ab60759807d0e9f8c7afd5374",
+    "road_preserve_train.py": "c07de6641b4c8c58529c13b3b2fc1cc7cccc0cc6f1271d1e8df752c5dd1e0cb2",
+    "road_preserve_summary.py": "63fdc0c6c7c232568673881bed9590e65818f3c520aa18622396cb83999d6b78"
+  }
+}

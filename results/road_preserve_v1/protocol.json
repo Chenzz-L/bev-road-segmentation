@@ -1,0 +1,25 @@
+{
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "strengths": [
+    0,
+    0.25,
+    1,
+    4
+  ],
+  "threshold": 0.6,
+  "epochs": 12,
+  "lr": 0.0003,
+  "batch_size": 24,
+  "architecture": "unchanged equal-weight residual model from adaptive_v1; frozen 200-scene baseline",
+  "loss": "BCE + lambda * weighted mean squared downward logit change on baseline-correct true road",
+  "protection": "true road AND baseline probability >= 0.6; weight 2 without ground, 1 with ground; training labels only",
+  "checkpoint_selection": "dev IoU >= baseline, walkway pass FP <= baseline, recall >= baseline - 0.002; maximize IoU; fallback to unchanged baseline if none",
+  "strength_selection": "among .25,1,4 maximize number of seeds with feasible improved dev IoU, then mean dev IoU, then minimize mean walkway pass FP",
+  "control": "lambda 0 uses the same recall-constrained checkpoint selection",
+  "evaluation": "evaluate only lambda 0 and dev-selected lambda, on existing 150/27-scene sets after all training",
+  "validation_caveat": "Existing evaluation sets have been inspected before; this is not a new blind test"
+}
