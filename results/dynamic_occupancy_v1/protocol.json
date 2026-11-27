@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-27",
+  "status": "LOCKED_BEFORE_DYNAMIC_EVALUATION",
+  "no_training": true,
+  "task": "Future car occupancy and anticipatory restriction of current evidence-supported road candidates; not full future freespace reconstruction",
+  "anchors": "All original 542 frames / 150 official validation scenes; retain anchors with no detections, false detections and unmatched forecasts",
+  "exclude_other_road_sets_due_gru_overlap": {
+    "dev": {
+      "train_scenes": 35,
+      "dev_scenes": 12,
+      "official_val_scenes": 0
+    },
+    "reserved": {
+      "train_scenes": 20,
+      "dev_scenes": 7,
+      "official_val_scenes": 0
+    }
+  },
+  "road_seeds": [
+    17,
+    29,
+    43
+  ],
+  "road_thresholds": {
+    "17": 0.35,
+    "29": 0.5,
+    "43": 0.35
+  },
+  "future_queries": "Nearest keyframe to nominal 1/2/3 s within 0.1 s and 0.75 s maximum intermediate gap, per horizon independently; use actual dt for every predictor; absent future gets explicit exclusion",
+  "coordinates": "All outputs in current LIDAR timestamp ego frame, fixed 48m x 48m / 0.5m grid; no future ego pose input",
+  "arms": [
+    "current",
+    "hold",
+    "cv",
+    "ctrv",
+    "gru",
+    "hold_pad",
+    "cv_pad",
+    "ctrv_pad",
+    "gru_pad"
+  ],
+  "scope": "Car trajectory model only. Other obstacles and current car occupancy remain in original current blocked mask. Future GT entrants and missed cars are included, without GT matching gates.",
+  "prediction": "Reuse all cached causal forecasts regardless of labeled/instance/error fields, strip GT metadata. Verify current detection indices and positions against causal states. Missing forecasts use current detector velocity CV for all moving models.",
+  "heading": "Current detected box rotation and dimensions held fixed for every model; only predicted translation differs. GRU does not predict yaw.",
+  "interpolation": "CV/CTRV queried analytically at actual dt. GRU global XY residual interpolated at 0,.5,...,3s; for 3<dt<=3.1 hold final residual and continue CV. No future measurement enters predictors.",
+  "uncertainty": "Separate non-probabilistic margin sensitivity: each side +0.25+0.25*dt meters for hold/CV/CTRV/GRU equally. No outcome-based margin tuning.",
+  "release": "Original road probability threshold AND current ground AND NOT current blocked AND NOT predicted future occupancy. Unknown/currently blocked areas never become released merely because a car is predicted to leave.",
+  "primary": "Per horizon, future car-conflicting released grid cells versus hold, with road coverage and false blocking cost; GRU versus CTRV on identical anchors and footprints",
+  "secondary": "Future all-annotated-actor conflicts, offroad release, occupancy IoU and recall, current-absent entering GT cars, per-log distribution; annotations are incomplete freespace evidence",
+  "bootstrap": "1000 paired log draws; three fixed road seeds averaged; no significance claim or independence of frames",
+  "success": "Report tradeoff, not simply fewer conflicts from smaller release area. Only claim no-coverage-loss improvement when car conflicts decrease and evaluable road coverage does not decrease.",
+  "demo_selection": "Top three distinct logs by predicted GRU-at-3s intrusion into seed17 current candidates; input-only example selection, not metric/GT cherry-picking",
+  "limits": [
+    "Previously inspected validation set, not blind",
+    "GRU trained on 560 scenes, selected on 140; tracker penalty previously tuned on val",
+    "Road task log isolation does not remove detection pretraining exposure",
+    "Current car-blocked/unknown regions remain blocked/unknown even if cars leave",
+    "Instantaneous occupancy, not swept path, ego planning, collision avoidance or safety certification",
+    "Constant box yaw can misrepresent turning vehicles",
+    "Only cars receive motion prediction; other future actors evaluated as an additional limitation",
+    "Free means no annotated actor plus current ground evidence, not verified future physical free space"
+  ],
+  "protected_sha256": {
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_manifest.json": "aceee4283e6a8ecd86397dd2b7ac7738098976948d390040c70c543c593fdf91",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_references.npz": "23be7ec0e175bf53942c47a720c28ca186ff82bc902d46c85add36941aa6fafb",
+    "${BEVFUSION_PROJECT}/full_val/predictions/pred_instances_3d/results_nusc.json": "f42eff5ff05aff2504bc591a9a5eb69d86848859517daf66991c7cf37d104073",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/outputs/val_v1/penalty8_states.jsonl.gz": "b0b6e68cf8124978af9769d0d861ac1308890aa9effb52599126c56b2366f04b",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/outputs/gru_val_v1/forecasts.jsonl.gz": "735f441a3fb3aa5121f0f39def96b44e0e690ae8eaef9871a19e021b95dd4a74",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/outputs/val_v1/penalty8_forecasts.jsonl.gz": "2c5edee56859a83a0b9c248ba7f6d93993ec2ee8527bc5436b38b0df80d10a74",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/gru_run_v1/best.pt": "26ca935c33ee03550b976e7395598896cd03717c7a648b180285eeb0fed0946f",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/gru_data_v2/split.json": "4fd6ca96911337eadfd31e358d7d3adb36dea9d2fa7e005bdcc478765047d3eb",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/outputs/gru_val_v1/summary.json": "317178a188b4aa155be7c818f1cbfa044da0da732e1237b50061f49e1b4bd2ec",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/selection_17.json": "54ee92152b9a66379019c452805714a8d15ac5f9fc8364edbf7efff1d65fa88a",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_wide_fusion_17_prob.npy": "e80c0c0f5ad0ef2e1efc10e88e2a90904914d3bdbdecd4f9cb34d0662388a5b4",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/wide/fusion/17.pt": "4d4d5ee398936b58933e401f3acb8e271e9158d603fdadf04cd6f8bc17864ea4",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/selection_29.json": "9654696c64639e7bf78c3f409c7699fe15930e9546ac657713f9dcdb4539756a",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_wide_fusion_29_prob.npy": "56e47bb188a1a869c56e06ee5020ed89158fa44e845ad83d113291c5320b7735",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/wide/fusion/29.pt": "a9631e5b46ea26cfbbca1dce583b51d67382fa92918bb2fde05ffe370ec0820d",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/selection_43.json": "a1b3a3f26aaa7f05aefd5dbcf214e75864fbffb65847e879d50c60141594d948",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_wide_fusion_43_prob.npy": "672717199da3d52012ba5d36d88389a631ba798e9f122c57e99269fd56bc4882",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/wide/fusion/43.pt": "033cfbf15741e4c3034ea6dbad9e70fcebc6c05e6f76c468f5b481f2482f025d"
+  },
+  "script_sha256": {
+    "dynamic_road_trial.py": "fe2b0e0e0b45bbb8e806be1fd56df8ad9c9015a9971231bc9944d9af714ff44d",
+    "dynamic_road_core.py": "a0eb03726845969d0a80fb097744f1cbfbbc84cc9c0b772bf0f80bd15a8bcb7f"
+  }
+}

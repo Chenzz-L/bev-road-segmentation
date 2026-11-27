@@ -1,0 +1,21 @@
+{
+  "counts": {
+    "max_anchor_sample_lidar_skew_us": 0,
+    "car_detections": 5379,
+    "short_history_cv": 1945,
+    "gru": 3434,
+    "residual_endpoint_hold_queries": 166,
+    "missing_future_1s": 166,
+    "missing_future_2s": 190,
+    "missing_future_3s": 194
+  },
+  "max_time_error_seconds": 0.0999509999999999,
+  "frames_by_horizon": [
+    542,
+    376,
+    352,
+    348
+  ],
+  "all_car_forecasts_used_without_gt_match_filter": true,
+  "annotations_loaded": false
+}

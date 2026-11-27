@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "original_sources_unchanged": true,
+  "predictions_locked_before_future_annotations": true,
+  "no_training": true,
+  "no_gt_matching_filter": true,
+  "no_future_pose_input": true,
+  "unknown_and_current_blocked_never_newly_released": true,
+  "all_three_road_seeds_reported": true
+}

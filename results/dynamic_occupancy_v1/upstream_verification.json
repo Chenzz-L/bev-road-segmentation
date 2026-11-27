@@ -1,0 +1,6 @@
+{
+  "gru_checkpoint_matches_forecast_summary": true,
+  "checkpoint_sha256": "26ca935c33ee03550b976e7395598896cd03717c7a648b180285eeb0fed0946f",
+  "forecast_anchors": 56187,
+  "scored_anchors": 33855
+}

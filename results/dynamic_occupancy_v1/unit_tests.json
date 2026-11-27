@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "width_length_axes": true,
+  "global_to_current_ego": true,
+  "cv_ctrv_limits": true,
+  "zero_gru_residual_parity": true,
+  "no_new_release_without_current_evidence": true
+}

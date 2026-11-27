@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "sdk_box_footprints_compared": 1042,
+  "forecast_replays": 5379,
+  "forecast_max_abs_m": 0.0,
+  "independent_count_vectors": 43686,
+  "current_candidate_subset_verified": true,
+  "ground_truth_metadata_sha256": {
+    "sample.json": "6035ac58b6e971622be2bb1be15b917e7cb4e05ae984d6b339c27c1699c4ad9d",
+    "sample_annotation.json": "1f4f3835cb86f4efe49ccad3ae6f5f6a2d068422696de564c5892b5b06bea2a9",
+    "ego_pose.json": "be12bd501f694b344628ba0680a37d6e1ec83e62b37f310c205c1dbe41cd09ff",
+    "instance.json": "8f8b19496ce45353874714ce23a9df7f47f48cb6203df2dd456ea0247d146461",
+    "category.json": "30f64fb175e5bd7db99892d90f9034481bca491f26600c5c0d1a56106b198dfe"
+  },
+  "cache_boundary": "Upstream forecast JSON records contain evaluation metadata; inference copies only tracking_id, used_gru and predictions. Targets, labels, errors and instance matching IDs never enter dynamic_road_core. Future occupancy annotation table is loaded only after prediction lock."
+}

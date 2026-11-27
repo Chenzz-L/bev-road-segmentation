@@ -1,0 +1,42 @@
+{
+  "scene": "scene-0798",
+  "selection": "Same scene as previous dynamic example; selected before rolling inference, no selection by road prediction quality",
+  "frames": 40,
+  "elapsed_seconds": 19.500687,
+  "ego_distance_m": 128.51617715705635,
+  "road": "Fresh frozen BEVFusion camera/LiDAR/fused feature inference at every actual keyframe, same current-sweep extraction and ego sampling as old cache; width96 fusion RoadHead seed17",
+  "road_threshold": 0.35,
+  "geometry": "Recompute ground/elevated returns from each current point cloud; current detected vehicle footprints at score >=0.3",
+  "motion": "Timestamp-indexed existing causal radar tracking and CV/GRU forecasts; all current car detections score>=0.1, no GT matching filter",
+  "horizons": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "render_horizon": 2,
+  "coordinates": "Per-frame current ego grid, plus global trajectory display using observed ego poses only; global viewport extent is offline visualization metadata",
+  "no_training": true,
+  "no_map_label_input": true,
+  "no_temporal_road_network": true,
+  "no_frame_interpolation": true,
+  "playback": "Actual approximately 2 Hz keyframes at recorded timestamp intervals; offline replay, not an end-to-end real-time speed claim",
+  "verification": "Compare shared old anchors against existing road probabilities and ground/blocked masks, and prove per-frame inference through unique feature/probability fingerprints",
+  "protected_sha256": {
+    "${BEVFUSION_PROJECT}/bevfusion-pretrained.pth": "e68c6c084d8971f4f879751b0ed3981f575c24ee3cf385a1e39197c26a9bb3ab",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/wide/fusion/17.pt": "4d4d5ee398936b58933e401f3acb8e271e9158d603fdadf04cd6f8bc17864ea4",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/selection_17.json": "54ee92152b9a66379019c452805714a8d15ac5f9fc8364edbf7efff1d65fa88a",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_wide_fusion_17_prob.npy": "e80c0c0f5ad0ef2e1efc10e88e2a90904914d3bdbdecd4f9cb34d0662388a5b4",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_manifest.json": "aceee4283e6a8ecd86397dd2b7ac7738098976948d390040c70c543c593fdf91",
+    "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/val_references.npz": "23be7ec0e175bf53942c47a720c28ca186ff82bc902d46c85add36941aa6fafb",
+    "${BEVFUSION_PROJECT}/full_val/predictions/pred_instances_3d/results_nusc.json": "f42eff5ff05aff2504bc591a9a5eb69d86848859517daf66991c7cf37d104073",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/outputs/val_v1/penalty8_states.jsonl.gz": "b0b6e68cf8124978af9769d0d861ac1308890aa9effb52599126c56b2366f04b",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/outputs/val_v1/penalty8_forecasts.jsonl.gz": "2c5edee56859a83a0b9c248ba7f6d93993ec2ee8527bc5436b38b0df80d10a74",
+    "${BEVFUSION_PROJECT}/trajectory_prediction/outputs/gru_val_v1/forecasts.jsonl.gz": "735f441a3fb3aa5121f0f39def96b44e0e690ae8eaef9871a19e021b95dd4a74",
+    "${ROAD_WORK_DIR}/dynamic_road_core.py": "a0eb03726845969d0a80fb097744f1cbfbbc84cc9c0b772bf0f80bd15a8bcb7f",
+    "${ROAD_WORK_DIR}/road_shared_features.py": "60db8760285b5be532415fc3d2f574f151d3707010cd73165a7573d46970214d",
+    "${ROAD_WORK_DIR}/road_obstacle_check.py": "8b5216410e52033fa065128991c59c8176cd76b5907ca160d15a513157417ef5",
+    "${ROAD_WORK_DIR}/road.py": "a704f86f6c8660d8ca0ac281846bc4563ec81c37f1e67785d9899e2157e702fb"
+  },
+  "script_sha256": "67d2de2292ee32c42dfb65468f620e8a3595aba2e22e290692c33a5e20d6bfe6"
+}

@@ -1,0 +1,6 @@
+{
+  "superseded_attempt": "${ROAD_WORK_DIR}/road_refinement/shared_bev/train200/log_head_capacity_v1/dynamic_occupancy_v1_attempt01_angle_convention",
+  "reason": "Correct planar heading to match original nuScenes SDK Quaternion.yaw_pitch_roll; independent replay compared every current car footprint before recomputing results.",
+  "metric_tuning": false,
+  "all_current_car_footprints_verified": 5379
+}

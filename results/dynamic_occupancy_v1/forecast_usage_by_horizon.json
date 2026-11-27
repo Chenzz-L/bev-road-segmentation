@@ -1,0 +1,22 @@
+{
+  "0": {
+    "car_predictions": 5379,
+    "gru_active": 3434,
+    "cv_short_history": 1945
+  },
+  "1": {
+    "car_predictions": 3732,
+    "gru_active": 2116,
+    "cv_short_history": 1616
+  },
+  "2": {
+    "car_predictions": 3485,
+    "gru_active": 2005,
+    "cv_short_history": 1480
+  },
+  "3": {
+    "car_predictions": 3441,
+    "gru_active": 1943,
+    "cv_short_history": 1498
+  }
+}
